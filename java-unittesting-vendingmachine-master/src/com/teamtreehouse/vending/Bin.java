@@ -24,6 +24,9 @@ public class Bin {
     }
 
     public int getItemPrice() {
+        if(isEmpty()){
+            return 0;
+        }
         return items.peek().getRetailPrice();
     }
 
@@ -31,6 +34,13 @@ public class Bin {
         return items.poll();
     }
 
+    /**
+     *
+     * @param name if it stores wrong food
+     * @param amount if it stocks more than it has in the machine , I think..
+     * @param wholesalePrice
+     * @param retailPrice
+     */
     public void restock(String name, int amount, int wholesalePrice, int retailPrice) {
         if (!isEmpty() && !name.equalsIgnoreCase(getItemName())) {
             throw new IllegalArgumentException(String.format("Cannot restock %s with %s", getItemName(), name));
