@@ -19,8 +19,10 @@ public class BinTest {
         bin = new Bin(10);
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void restockingWithDifferentItemsIsNotAllowed() throws Exception {
+        thrown.expect(IllegalArgumentException.class);
+        thrown.expectMessage("Cannot restock Cheetos with Doritos");
         bin.restock("Cheetos", 1, 100, 50);
         bin.restock("Doritos", 1, 100, 50);
     }
@@ -40,7 +42,7 @@ public class BinTest {
     @Test
     public void overStockingNotAllowed() {
         thrown.expect(IllegalArgumentException.class);
-        thrown.expectMessage("There are only spots left");
+        thrown.expectMessage("There are only 10 spots left");
         bin.restock("fritos", 2600, 100, 50);
     }
 }
